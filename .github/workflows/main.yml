@@ -56,7 +56,7 @@ jobs:
           cd ./venv/lib/python3.8/site-packages
           zip -r9 ../../../../apivone.zip .
       - name: Add API files to Zip file
-        run: cd ./slsdeploy && zip -g ../apivone.zip -r .
+        run: cd ./apivone && zip -g ../apivone.zip -r .
       - name: Upload zip file artifact
         uses: actions/upload-artifact@v2
         with:
