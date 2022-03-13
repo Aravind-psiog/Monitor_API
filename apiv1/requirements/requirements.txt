@@ -1,0 +1,10 @@
+psycopg2
+pydantic[email]
+autopep8
+SQLAlchemy-Utils
+schedule
+requests
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
+mangum
