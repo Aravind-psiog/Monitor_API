@@ -47,8 +47,14 @@ jobs:
         run: python -m venv venv && source venv/bin/activate && pip3 install -r requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
 
+      - name: remove 
+        run: rm -r /venv psycopg2
+        
       - name: list
         run: ls
+
+      - name: copy
+        run: cp /psycop2-fix/psycopg2 /venv/lib/python3.8/site-packages
 
       - name: Run Tests   
         # Note that you have to activate the virtualenv in every step
