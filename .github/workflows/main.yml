@@ -51,7 +51,10 @@ jobs:
         run: ls
         
       - name: remove 
-        run: rm -r ./venv/lib/python3.8/site-packages psycopg2
+        run: cd ./venv/lib/python3.8/site-packages && rm -r psycopg2 && cd
+
+      - name: list
+        run: ls
 
       - name: copy
         run: cp /psycop2-fix/psycopg2 /venv/lib/python3.8/site-packages
