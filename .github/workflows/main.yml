@@ -57,7 +57,7 @@ jobs:
         run: ls
 
       - name: copy
-        run: cd /psycop2-fix && cp psycopg2 ./venv/lib/python3.8/site-packages
+        run: cd ./psycop2-fix && cp psycopg2 ./venv/lib/python3.8/site-packages
 
       - name: Run Tests   
         # Note that you have to activate the virtualenv in every step
