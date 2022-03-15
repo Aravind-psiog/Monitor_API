@@ -46,17 +46,11 @@ jobs:
       - name: Activate Virtual ENV
         run: python -m venv venv && source venv/bin/activate && pip3 install -r requirements.txt
         if: steps.cache-venv.outputs.cache-hit != 'true'
-
-      - name: list
-        run: ls
         
-      - name: remove 
+      - name: remove psycopg2
         run: cd ./venv/lib/python3.8/site-packages && rm -r psycopg2 && cd
 
-      - name: list
-        run: ls
-
-      - name: copy
+      - name: copy custom build psycopg2
         run: cd ./psycop2-fix && cp -r psycopg2 ../venv/lib/python3.8/site-packages
 
       - name: Run Tests   
