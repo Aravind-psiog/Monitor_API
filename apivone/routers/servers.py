@@ -8,13 +8,13 @@ from managers import tokenmanager
 from mangum import Mangum
 
 router = APIRouter(
-    prefix = "/api/server",
+    prefix="/api/server",
     tags=["server"]
-    )
+)
 
 
 @router.get('/list-server-group')
-def list_server_group( db: Session = Depends(get_db), current_user: schemas.UserItems = Depends(tokenmanager.get_current_user)):
+def list_server_group(db: Session = Depends(get_db), current_user: schemas.UserItems = Depends(tokenmanager.get_current_user)):
     get_groups = crud.get_server_group(current_user, db)
     if get_groups:
         raise HTTPException(status_code=status.HTTP_200_OK, detail={
@@ -25,11 +25,13 @@ def list_server_group( db: Session = Depends(get_db), current_user: schemas.User
 
 @router.post('/create-server')
 async def create_server(background_tasks: BackgroundTasks, request: schemas.ServerDetailsItems, db: Session = Depends(get_db), current_user: schemas.UserItems = Depends(tokenmanager.get_current_user)):
-    create = crud.create_server(background_tasks,request, db, current_user)
-    if create:
+    create = crud.create_server(request, db, current_user)
+    if create == 0:
         raise HTTPException(status_code=status.HTTP_200_OK, detail={"success": True, "data": jsonable_encoder(
             request), "message": f"Server {request.ip_address} added successfully"})
-    raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail={
-                        "success": False, "data": jsonable_encoder(request), "message": f"Something went wrong"})
-
-handler = Mangum(router)
+    elif create == 2:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail={
+            "success": False, "data": jsonable_encoder(request), "message": f"Something went wrong"})
+    else:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail={
+            "success": False, "data": jsonable_encoder(request), "message": f"Invalid IP address"})

@@ -16,6 +16,7 @@ def verify_hash(plain,hashed):
     # plain = plain.encode('utf-8')
     # hashed = hashed.encode('utf-8')
     # return bcrypt.checkpw(plain, hashed)
+    print(plain,hashed)
     if plain==hashed:
         return True
     return False

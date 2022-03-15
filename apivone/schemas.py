@@ -7,8 +7,10 @@ class UserItems(BaseModel):
     username: str
     password: str
 
+
 class GetUser(BaseModel):
-    email : EmailStr
+    email: EmailStr
+
 
 class ServerItems(BaseModel):
     # email: EmailStr
@@ -38,10 +40,15 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
+
 class Token(BaseModel):
     access_token: str
     token_type: str
 
 
 class TokenData(BaseModel):
-    email: Optional[str] = None    
+    email: Optional[str] = None
+
+
+class UserList(BaseModel):
+    email: str
