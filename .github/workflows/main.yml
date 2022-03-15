@@ -66,14 +66,14 @@ jobs:
       - name: Create archive of dependencies
         run: |
           cd ./venv/lib/python3.8/site-packages
-          zip -r9 ../../../../apivone.zip .
+          zip -r9 ../../../../app.zip .
       - name: Add API files to Zip file
-        run: cd ./apivone && zip -g ../apivone.zip -r .
+        run: cd ./app && zip -g ../app.zip -r .
       - name: Upload zip file artifact
         uses: actions/upload-artifact@v2
         with:
-          name: apivone
-          path: apivone.zip
+          name: app
+          path: app.zip
 
   CD:
     runs-on: ubuntu-latest
@@ -88,18 +88,18 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-      - name: Download Lambda apivone.zip
+      - name: Download Lambda app.zip
         uses: actions/download-artifact@v2
         with:
-          name: apivone
+          name: app
       - name: Upload to S3
-        run: aws s3 cp apivone.zip s3://fastapifunctions/apivone.zip
+        run: aws s3 cp app.zip s3://fastapifunctions/app.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       - name: Deploy new Lambda
-        run: aws lambda update-function-code --function-name MonitorBotApi --s3-bucket fastapifunctions --s3-key apivone.zip
+        run: aws lambda update-function-code --function-name MonitorBotApi --s3-bucket fastapifunctions --s3-key app.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

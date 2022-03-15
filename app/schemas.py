@@ -5,7 +5,8 @@ from typing import Optional
 class UserItems(BaseModel):
     email: EmailStr
     username: str
-    password: str
+    password1: str
+    password2: str
 
 
 class GetUser(BaseModel):

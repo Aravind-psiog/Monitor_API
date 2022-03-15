@@ -30,6 +30,9 @@ def list_users(db: Session = Depends(get_db), current_user: schemas.UserItems = 
 
 @router.post('/create-user')
 def create_user(request: schemas.UserItems, db: Session = Depends(get_db)):
+    if request.password1 != request.password2:
+        raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail={
+                            "success": True, "data": None, "message": f"Password Doesnot Match"})
     new_user = crud.create_user(request, db)
     if new_user:
         raise HTTPException(status_code=status.HTTP_200_OK, detail={"success": True, "data": jsonable_encoder(
