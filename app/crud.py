@@ -54,7 +54,6 @@ def invite_user(request, db, current_user):
     try:
         db.query(models.UserItems).filter(
             models.UserItems.email.like(current_user.email)).one()
-        return 2
     except:
         pass
     try:
