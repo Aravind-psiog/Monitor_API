@@ -36,6 +36,8 @@ For deploying it on AWS lambda, create a repo in Github and add the aws secret,a
 
 After completing the setup. Deploy it to the git repo. It created a action pipeline which does the rest of the work.
 
+This app is live on <https://z3reusmmg9.execute-api.us-east-1.amazonaws.com/dev/docs>
+
 ## Troubleshooting
 
 The psycopg2 library which was installed doesnot work on aws lambda engine. reference >> <https://github.com/jkehler/awslambda-psycopg2/issues/47>
