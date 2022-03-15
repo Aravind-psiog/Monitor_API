@@ -53,7 +53,7 @@ def invite_user(request, db, current_user):
     code = str(uuid.uuid4())
     try:
         check = db.query(models.UserItems).filter(
-            models.UserItems.email.like(request.email)).one()
+            models.UserItems.email.like(request.user)).one()
         print(jsonable_encoder(check))
     except:
         return 2
