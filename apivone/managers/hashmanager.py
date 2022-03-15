@@ -7,12 +7,18 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 def hash_password(password):
     # password = password.encode('utf-8')
     # hashed_password = bcrypt.hashpw(password, salt)
-    hashed_password = pwd_context.hash(password)
-    return hashed_password
+    try:
+        hashed_password = pwd_context.hash(password)
+        return hashed_password
+    except Exception as e:
+        print(e)
 
 
 def verify_hash(plain,hashed):
     # plain = plain.encode('utf-8')
     # hashed = hashed.encode('utf-8')
     # return bcrypt.checkpw(plain, hashed)
-    return pwd_context.verify(plain,hashed)
+    try:
+        return pwd_context.verify(plain,hashed)
+    except Exception as e:
+        print(e)
