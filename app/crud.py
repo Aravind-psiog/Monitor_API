@@ -52,10 +52,11 @@ def get_users(db, email):
 def invite_user(request, db, current_user):
     code = str(uuid.uuid4())
     try:
-        db.query(models.UserItems).filter(
-            models.UserItems.email.like(current_user.email)).one()
+        check = db.query(models.UserItems).filter(
+            models.UserItems.email.like(request.email)).one()
+        print(jsonable_encoder(check))
     except:
-        pass
+        return 2
     try:
         db.query(models.GroupItems).filter(models.GroupItems.email.like(
             current_user.email), models.GroupItems.server_group.like(request.invited_to)).one()
