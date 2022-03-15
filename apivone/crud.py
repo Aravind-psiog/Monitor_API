@@ -117,3 +117,15 @@ def cron_post(db, user_id, stat):
 def login_user(request,db):
     login = db.query(models.UserItems).filter(models.UserItems.email==request.username).first()
     return login
+
+def list_member(group, db, current_user):
+    members=[]
+    try:
+        server_member = db.query(models.GroupItems).filter(models.GroupItems.email.like(current_user.email),models.GroupItems.server_group.like(group)).one()
+    except Exception as e:
+        print(e)
+        return False
+    if server_member:
+        server_member = db.query(models.GroupItems).filter(models.GroupItems.email.notlike(current_user.email),models.GroupItems.server_group.like(group)).all()
+        return server_member
+    return False

@@ -9,8 +9,8 @@ from mangum import Mangum
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(root_path="/dev/") #only used for aws for loading Swagger doc. Doesnot work on windows
-#app = FastAPI()
+#app = FastAPI(root_path="/dev/") #only used for aws for loading Swagger doc. Doesnot work on windows
+app = FastAPI()
 
 @app.get('/')
 def root():

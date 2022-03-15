@@ -45,4 +45,11 @@ def invite(request: schemas.InviteItems, db: Session = Depends(get_db), current_
                         "success": False, "data": jsonable_encoder(request), "message": f"Invite already sent to {request.user}"})
 
 
-handler = Mangum(router)
+@router.get('/get-group-members/{group}')
+def group_member(group:str,db: Session = Depends(get_db), current_user: schemas.UserItems = Depends(tokenmanager.get_current_user)):
+    list_member = crud.list_member(group, db, current_user)
+    if list_member:
+        raise HTTPException(status_code=status.HTTP_200_OK, detail={"success": True, "data": jsonable_encoder(
+            list_member), "message": f"Members of {group}!"})
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={"success": False, "data": jsonable_encoder(
+        list_member), "message": f"Members of {group}!"})
