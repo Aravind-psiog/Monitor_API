@@ -9,7 +9,7 @@ from managers import manage, hashmanager
 
 
 def create_user(request, db):
-    hashed_password = hashmanager.hash_password(request.password)
+    hashed_password = hashmanager.hash_password(request.password1)
     new_user = models.UserItems(
         email=request.email, created_on=datetime.now(), username=request.username, password=hashed_password)
     db.add(new_user)
@@ -52,6 +52,12 @@ def get_users(db, email):
 def invite_user(request, db, current_user):
     code = str(uuid.uuid4())
     try:
+        db.query(models.UserItems).filter(
+            models.UserItems.email.like(current_user.email)).one()
+        return 2
+    except:
+        pass
+    try:
         db.query(models.GroupItems).filter(models.GroupItems.email.like(
             current_user.email), models.GroupItems.server_group.like(request.invited_to)).one()
     except Exception as e:
@@ -67,7 +73,7 @@ def invite_user(request, db, current_user):
     db.add(invite_user)
     try:
         db.commit()
-        return 2
+        return {"code": code[:8]}
     except exc.IntegrityError:
         return False
 
@@ -130,7 +136,6 @@ def login_user(request, db):
 
 
 def list_member(group, db, current_user):
-    members = []
     try:
         server_member = db.query(models.GroupItems).filter(models.GroupItems.email.like(
             current_user.email), models.GroupItems.server_group.like(group)).one()

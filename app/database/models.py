@@ -13,17 +13,19 @@ class UserItems(Base):
 
     group = relationship("GroupItems", back_populates="owner")
 
+
 class GroupItems(Base):
     __tablename__ = "server_member"
 
     id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, ForeignKey("users.email"),unique=False)
+    email = Column(String, ForeignKey("users.email"), unique=False)
     server_group = Column(String)
     admin = Column(BOOLEAN)
     username = Column(String)
     created_on = Column(TIMESTAMP)
 
     owner = relationship("UserItems", back_populates="group")
+
 
 class ServerGroup(Base):
     __tablename__ = "server_group"
@@ -42,6 +44,7 @@ class InviteItems(Base):
     code = Column(String)
     invited_on = Column(TIMESTAMP)
 
+
 class ServerItems(Base):
     __tablename__ = "servers"
 
@@ -51,4 +54,3 @@ class ServerItems(Base):
     online = Column(BOOLEAN)
     ip_address = Column(String)
     notified = Column(BOOLEAN, default=False)
-    

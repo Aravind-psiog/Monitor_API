@@ -44,15 +44,19 @@ def create_user(request: schemas.UserItems, db: Session = Depends(get_db)):
 @router.post('/invite/')
 def invite(request: schemas.InviteItems, db: Session = Depends(get_db), current_user: schemas.UserItems = Depends(tokenmanager.get_current_user)):
     invite = crud.invite_user(request, db, current_user)
-    if invite == 2:
-        raise HTTPException(status_code=status.HTTP_200_OK, detail={"success": True, "data": jsonable_encoder(
-            request), "message": f"Invite sent to {request.user}!"})
-    elif invite == 0:
+    print(invite)
+    if invite == 0:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail={
             "success": False, "data": jsonable_encoder(request), "message": f"Invalid group"})
-    else:
+    elif invite == 1:
         raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail={
             "success": False, "data": jsonable_encoder(request), "message": f"Invite already sent to {request.user}"})
+    elif invite == 2:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail={
+            "success": False, "data": jsonable_encoder(request), "message": f"Not autherized"})
+    else:
+        raise HTTPException(status_code=status.HTTP_200_OK, detail={"success": True, "data": jsonable_encoder(
+            invite["code"]), "message": f"Invite sent to {request.user}!"})
 
 
 @router.get('/get-group-members/{group}')
