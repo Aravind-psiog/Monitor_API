@@ -1,8 +1,9 @@
 from cgitb import handler
 from fastapi import FastAPI
+
 from database import models
 from database.database import engine
-from routers import users, members, servers, authentication, external
+from routers import users, members, servers, authentication
 from mangum import Mangum
 
 
@@ -22,5 +23,4 @@ app.include_router(authentication.router)
 app.include_router(users.router)
 app.include_router(members.router)
 app.include_router(servers.router)
-app.include_router(external.router)
 handler = Mangum(app)

@@ -11,7 +11,7 @@ import schemas
 
 SECRET_KEY = "383eb18a4ef75ab0d28e3f56eefe64c43019863b3868bf13e94f728bc38f3c7c"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = 500
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
@@ -23,7 +23,7 @@ def create_access_token(data: dict, expires_delta: Optional[str] = None):
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=60)
+        expire = datetime.utcnow() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
