@@ -1,0 +1,7 @@
+{
+    "APP": {
+        "DATABASE": "postgresql://auth_user:Psiog123@65.21.191.36:5432/auth_db",
+        "BASE_URL": "http://127.0.0.1:8000/",
+        "API_ENDPOINT": "http://127.0.0.1:8000/api"
+    }
+}
