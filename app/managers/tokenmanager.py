@@ -15,6 +15,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+print(oauth2_scheme)
 expires_delta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
 
