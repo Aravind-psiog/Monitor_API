@@ -5,7 +5,7 @@
         "API_ENDPOINT": "http://127.0.0.1:8000/api"
     },
     "Tokens": {
-        "bearer": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhcmF2aW5kLnByYWJhaGFyYW5AcHNpb2cuY29tIiwiZXhwIjoxNjQ3NTEzMDUzfQ.-owBYbqDnk-1ey4-GEYIZ4shEl0g89rG-dmN3C2XOYs"
+        "bearer": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhcmF2aW5kLnByYWJhaGFyYW5AcHNpb2cuY29tIiwiZXhwIjoxNjQ3NTIxNTY3fQ.sbYcOPoYq94qD8J47JIrfbjmdPnIMQ6gc9zHw8M2_ws"
     },
     "Keys": {
         "AccessKey": "b2b0e29eccd589292f16475e8057f518"
