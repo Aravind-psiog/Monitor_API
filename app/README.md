@@ -40,7 +40,7 @@ This app is live on <https://z3reusmmg9.execute-api.us-east-1.amazonaws.com/dev/
 
 ### Error codes
 
-| Error code | Description |
+| Error Code | Description |
 | --- | --- |
 | `200` | OK |
 | `409` | Conflict |
