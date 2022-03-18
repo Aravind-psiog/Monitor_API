@@ -38,6 +38,17 @@ After completing the setup. Deploy it to the git repo. It created a action pipel
 
 This app is live on <https://z3reusmmg9.execute-api.us-east-1.amazonaws.com/dev/docs>
 
+### Error codes
+
+| Error code | Description |
+| --- | --- |
+| `200` | OK |
+| `409` | Conflict |
+| `401` | Un Authorized |
+| `404` | Not Found |
+| `405` | Method Not Allowed |
+| `400` | Bad Request |
+
 ## Troubleshooting
 
 The psycopg2 library which was installed doesnot work on aws lambda engine. reference >> <https://github.com/jkehler/awslambda-psycopg2/issues/47>
