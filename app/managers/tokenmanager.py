@@ -1,10 +1,7 @@
 from datetime import datetime, timedelta
-
-from fastapi import Depends, FastAPI, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
-from passlib.context import CryptContext
-from pydantic import BaseModel
 from typing import Optional
 import schemas
 
@@ -15,7 +12,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
-print(oauth2_scheme)
 expires_delta = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
 

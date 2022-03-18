@@ -1,12 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.encoders import jsonable_encoder
-import crud
+from crud import authentication
 from database.database import get_db
 from sqlalchemy.orm import Session
-import schemas
 from managers.hashmanager import verify_hash
 import managers.tokenmanager
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 from mangum import Mangum
 
 
@@ -17,7 +16,7 @@ router = APIRouter(
 
 @router.post('/login')
 def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    login = crud.login_user(request, db)
+    login = authentication.login_user(request, db)
     if login:
         verified = verify_hash(request.password, login.password)
         if verified:

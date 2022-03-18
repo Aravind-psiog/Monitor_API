@@ -1,5 +1,4 @@
 from fastapi.testclient import TestClient
-from fastapi import FastAPI
 from main import app
 from configs import loadconfigs
 

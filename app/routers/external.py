@@ -1,8 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.encoders import jsonable_encoder
-from database.database import get_db
-from sqlalchemy.orm import Session
-import schemas
+from fastapi import APIRouter, HTTPException, status
 import requests
 from configs import loadconfigs
 from mangum import Mangum
@@ -18,9 +14,9 @@ key = loadconfigs.read_config()["Keys"]["AccessKey"]
 
 @router.get("/{ip}/{type}")
 def external(ip, type):
+    type = type.lower()
     if type in ["basic", "medium", "full"]:
         try:
-            print(type)
             if type == "basic":
                 result = requests.get(
                     f"http://api.ipstack.com/{ip}?access_key={key}")
@@ -29,7 +25,6 @@ def external(ip, type):
             elif type == "medium":
                 result = requests.get(
                     f"http://api.ipstack.com/{ip}?access_key={key}")
-                print(result.json())
                 return HTTPException(status_code=status.HTTP_200_OK, detail={
                     "success": True, "data": {"ip": result.json()["ip"], "type": result.json()["type"], "country_name": result.json()["country_name"], "zip": result.json()["zip"], "location": result.json()["location"]}, "message": f"IP details"})
             result = requests.get(

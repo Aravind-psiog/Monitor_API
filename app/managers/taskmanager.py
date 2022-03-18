@@ -1,11 +1,10 @@
 import os
-from fastapi import BackgroundTasks, FastAPI
+from fastapi import FastAPI
 
 app = FastAPI()
 
 
-def ping_server(ip_address:str):
-    print("im pinging")
+def ping_server(ip_address: str):
     response = os.system("ping " + ip_address)
 
     if response == 0:
@@ -16,6 +15,6 @@ def ping_server(ip_address:str):
         print(False)
         return False
 
-def background(background_tasks, request, current_user,models,db):
-    print("im at background")
+
+def background(background_tasks, request, current_user, models, db):
     task = background_tasks.add_task(ping_server, request.ip_address)
