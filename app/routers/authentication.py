@@ -20,13 +20,12 @@ def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(
     if login:
         verified = verify_hash(request.password, login.password)
         if verified:
-
             access_token = managers.tokenmanager.create_access_token(
                 data={"sub": login.email})
             return {"access_token": access_token, "token_type": "bearer"}
-
+        response_object = jsonable_encoder(request)
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail={
-                            "success": False, "data": jsonable_encoder(request), "message": f"Incorrect Password"})
+                            "success": False, "data": response_object["username"], "message": f"Incorrect Password"})
     raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail={"success": True, "data": jsonable_encoder(
         request), "message": f"Invalid email address"})
 

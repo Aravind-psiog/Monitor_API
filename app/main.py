@@ -1,4 +1,3 @@
-from cgitb import handler
 from fastapi import FastAPI
 from database import models
 from database.database import engine
@@ -8,7 +7,7 @@ from mangum import Mangum
 
 models.Base.metadata.create_all(bind=engine)
 
-# only used for aws for loading Swagger doc. Doesnot work on windows
+# only used for aws for loading Swagger doc. Doesnot work on local route
 app = FastAPI(root_path="/dev/")
 # app = FastAPI()
 
@@ -23,4 +22,6 @@ app.include_router(users.router)
 app.include_router(members.router)
 app.include_router(servers.router)
 app.include_router(external.router)
+
+
 handler = Mangum(app)
