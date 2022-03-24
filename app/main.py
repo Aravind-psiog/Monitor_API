@@ -7,7 +7,7 @@ from mangum import Mangum
 
 models.Base.metadata.create_all(bind=engine)
 
-# only used for aws for loading Swagger doc. Doesnot work on local route
+# only used for aws for loading Swagger doc. Doesnot work on local machine
 app = FastAPI(root_path="/dev/")
 # app = FastAPI()
 
