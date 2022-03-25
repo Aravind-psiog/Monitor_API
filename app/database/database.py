@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from configs.loadconfigs import read_config
 
 # SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-SQLALCHEMY_DATABASE_URL = read_config()["APP"]["RDS_DATABASE"]
+SQLALCHEMY_DATABASE_URL = read_config()["APP"]["DATABASE"]
 
 
 engine = create_engine(
