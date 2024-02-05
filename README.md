@@ -1,13 +1,12 @@
 # AWS lambda
 
-## _Github action pipeline_
-
 ![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)
 
-The purpose of this project is to build a API with a reallife usecase.
+The purpose of this project is to build an API with a reallife usecase and a boilerplate with
 
-- FastAPI, Mangum
+- FastAPI and PostgreSQL
 - Auto pep8
+- CI/CD pipeline
 - documenting
 
 ## Installation
@@ -27,8 +26,8 @@ cd app
 uvicorn main:app --reload
 ```
 
-Default hostname is ```http://localhost:8000``` and as it has inbuild documentation, ```http://localhost:8000/docs``` can be used to view/test the API's.
-```main.py``` is the main app which has API functionalities.
+Default hostname is `http://localhost:8000` and as it has inbuild documentation, `http://localhost:8000/docs` can be used to view/test the API's.
+`main.py` is the main app which has API functionalities.
 
 ### AWS deployment
 
@@ -40,17 +39,17 @@ This app is live on <https://z3reusmmg9.execute-api.us-east-1.amazonaws.com/dev/
 
 ### Error codes
 
-| Error Code | Description |
-| --- | --- |
-| `200` | OK |
-| `409` | Conflict |
-| `401` | Un Authorized |
-| `404` | Not Found |
-| `405` | Method Not Allowed |
-| `400` | Bad Request |
+| Error Code | Description        |
+| ---------- | ------------------ |
+| `200`      | OK                 |
+| `409`      | Conflict           |
+| `401`      | Un Authorized      |
+| `404`      | Not Found          |
+| `405`      | Method Not Allowed |
+| `400`      | Bad Request        |
 
 ## Troubleshooting
 
 The psycopg2 library which was installed doesnot work on aws lambda engine. reference >> <https://github.com/jkehler/awslambda-psycopg2/issues/47>
 
-I have downloaded the custom build and placed it in ```psycop2-fix``` folder. The pipeline automatically adds this build to the S3 bucket.
+I have downloaded the custom build and placed it in `psycop2-fix` folder. The pipeline automatically adds this build to the S3 bucket.
