@@ -8,11 +8,9 @@ def ping_server(ip_address: str):
     response = os.system("ping " + ip_address)
 
     if response == 0:
-        print(True)
         return True
 
     else:
-        print(False)
         return False
 
 
